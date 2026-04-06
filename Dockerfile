@@ -1,14 +1,14 @@
-# Use Java 17 (stable for production)
 FROM eclipse-temurin:17-jdk
 
-# Set working directory
 WORKDIR /app
 
-# Copy all project files
 COPY . .
 
-# Build the jar file
+# ✅ FIX: give execute permission
+RUN chmod +x mvnw
+
+# Build the jar
 RUN ./mvnw clean package -DskipTests
 
-# Run the application
+# Run the app
 CMD ["sh", "-c", "java -jar target/*.jar"]
