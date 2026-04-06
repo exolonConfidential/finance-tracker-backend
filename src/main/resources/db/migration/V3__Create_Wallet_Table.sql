@@ -1,0 +1,13 @@
+
+
+
+CREATE TABLE wallets (
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	balance DECIMAL(19,2) NOT NULL,
+	type VARCHAR(50) NOT NULL,
+	is_active BOOLEAN DEFAULT TRUE,
+	user_id UUID NOT NULL,
+	CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+	CONSTRAINT uc_user_wallet_name UNIQUE(user_id, name)
+)
