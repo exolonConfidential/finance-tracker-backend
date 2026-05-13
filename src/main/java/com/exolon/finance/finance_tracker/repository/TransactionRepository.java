@@ -51,7 +51,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>,
 			WHERE t.user.id = :userId
 			AND (t.type = 'EXPENSE' OR t.type = 'INCOME')
 			AND t.transactionDate BETWEEN :startDate AND :endDate
-			GROUP BY c.name
+			GROUP BY c.name, c.type
 			\t""")
     List<CategoryStatsDto> getCategoryStats(
         @Param("userId") UUID userId, 
